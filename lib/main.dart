@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Home Demo',
       theme: ThemeData(
+        useMaterial3: true,
         backgroundColor: GlobalVariables.backgroundColor,
       ),
       home: const AuthScreen(),
