@@ -1,17 +1,30 @@
 //* IMPORT from packages
-const express = require('express');  // optional naming: express, you can name this anything
+const express = require("express"); // optional naming: express, you can name this anything
 // import 'package:express/express.dart';
+const mongoose = require("mongoose");
 
 //* IMPORT from FILES
-const authRouter = require("./routes/auth")
-
+const authRouter = require("./routes/auth");
 
 //* INIT
 const PORT = 3000;
 const app = express();
+const DB =
+  "mongodb+srv://abood:123abdul@cluster0.ie3rvas.mongodb.net/?retryWrites=true&w=majority";
 
 //* MIDDLEWARE
+app.use(express.json());
 app.use(authRouter);
+
+// * CONNECTIONS
+mongoose
+  .connect(DB)
+  .then(() => {
+    console.log("connection succesful");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 // CREATING AN API
 // GET, PUT, POST, DELETE, UPDATE -> CRUD
@@ -21,8 +34,8 @@ app.use(authRouter);
 //     res.json({name: "Abdul raheem"})
 // })
 
-app.listen(PORT, () => {
-    console.log(`connected at port ${PORT}`);   // JS you use ` back comma and ${} for string interpolation
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`connected at port ${PORT}`); // JS you use ` back comma and ${} for string interpolation
 });
 // If IP not specified then it will use default
 // LOCALHOST -> for some purposes android emulator doesnt support LOCALHOST
