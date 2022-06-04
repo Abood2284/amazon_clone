@@ -2,6 +2,7 @@
 const express = require("express"); // optional naming: express, you can name this anything
 // import 'package:express/express.dart';
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 //* IMPORT from FILES
 const authRouter = require("./routes/auth");
@@ -9,8 +10,7 @@ const authRouter = require("./routes/auth");
 //* INIT
 const PORT = 3000;
 const app = express();
-const DB =
-  "mongodb+srv://abood:123abdul@cluster0.ie3rvas.mongodb.net/?retryWrites=true&w=majority";
+const DB = process.env.API_KEY;
 
 //* MIDDLEWARE
 app.use(express.json());
@@ -21,6 +21,7 @@ mongoose
   .connect(DB)
   .then(() => {
     console.log("connection succesful");
+    console.log(process.env);
   })
   .catch((e) => {
     console.log(e);
