@@ -2,7 +2,7 @@
 const express = require("express"); // optional naming: express, you can name this anything
 // import 'package:express/express.dart';
 const mongoose = require("mongoose");
-require("dotenv").config();
+require("dotenv").config(); // TO hide our API key more on notion
 
 //* IMPORT from FILES
 const authRouter = require("./routes/auth");
@@ -21,7 +21,6 @@ mongoose
   .connect(DB)
   .then(() => {
     console.log("connection succesful");
-    console.log(process.env);
   })
   .catch((e) => {
     console.log(e);

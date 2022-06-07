@@ -19,6 +19,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.SignUp;
+  AuthService authService = AuthService();
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
 
@@ -35,11 +36,20 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signUpUser() {
-    AuthService().SignUp(
-        context: context,
-        email: _emailController.text,
-        name: _nameController.text,
-        password: _passwordController.text);
+    authService.SignUpUser(
+      context: context,
+      email: _emailController.text,
+      name: _nameController.text,
+      password: _passwordController.text,
+    );
+  }
+
+  void signInUser() {
+    authService.SignInUser(
+      context: context,
+      email: _emailController.text,
+      password: _passwordController.text,
+    );
   }
 
   @override
@@ -149,7 +159,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     padding: const EdgeInsets.all(8),
                     color: GlobalVariables.backgroundColor,
                     child: Form(
-                        key: _signUpFormKey,
+                        key: _signInFormKey,
                         child: Column(
                           children: [
                             CustomTextField(
@@ -166,7 +176,13 @@ class _AuthScreenState extends State<AuthScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            CustomButton(text: 'Sign In', onTap: () {}),
+                            CustomButton(
+                                text: 'Sign In',
+                                onTap: () {
+                                  if (_signInFormKey.currentState!.validate()) {
+                                    signInUser();
+                                  }
+                                }),
                           ],
                         )),
                   ),
