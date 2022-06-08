@@ -85,4 +85,5 @@ authRouter.get("/", auth, async (req, res) => {
 }); // auth -> is the middleware, responsible to make sure you have the capability to auth | it works like you are extracting the logic outside this file, now whenever you want to acces user token or user just use req.user while passing auth middleware
 // next(): -> becuase of next this fallback function will execute
 
+// So now this file is ready to be used from index.js
 module.exports = authRouter;

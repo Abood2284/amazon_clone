@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+// Model needs to have the same value as the model in node.js
 class User {
   final String id;
   final String email;
@@ -51,6 +52,7 @@ class User {
     };
   }
 
+// From map it will give you a user
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
       id: map['id'] ?? '',
@@ -65,6 +67,7 @@ class User {
 
   String toJson() => json.encode(toMap());
 
+// From json will convert it map then from map it will give you the user
   factory User.fromJson(String source) =>
       User.fromMap(json.decode(source) as Map<String, dynamic>);
 

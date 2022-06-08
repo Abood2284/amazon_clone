@@ -1,15 +1,18 @@
+/*
+ -> Connects the backend with flutter using http requests
+*/
 import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:amazon_clone/constants/error_handling.dart';
 import 'package:amazon_clone/constants/utils.dart';
 import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:amazon_clone/models/user.dart';
 import 'package:amazon_clone/providers/user_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../constants/global_variables.dart';
 
 class AuthService {
@@ -37,6 +40,8 @@ class AuthService {
               'application/json; charset=UTF-8', // Copy this line everytime you use http
         },
       );
+
+      /// Our own Error Handler [lib/constants/error_handling.dart]
       httpErrorHandle(
         response: res,
         context: context,
@@ -113,6 +118,7 @@ class AuthService {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': token,
         });
+        // ignore: use_build_context_synchronously
         Provider.of<UserProvider>(context, listen: false).setUser(userRes.body);
       }
     } catch (e) {}

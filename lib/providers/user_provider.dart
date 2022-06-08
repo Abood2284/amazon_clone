@@ -11,7 +11,10 @@ class UserProvider extends ChangeNotifier {
     type: '',
     token: '',
   );
+
   User get user => _user;
+
+  // Sets the user from json value
   void setUser(String user) {
     _user = User.fromJson(user);
     notifyListeners();

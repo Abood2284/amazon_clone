@@ -22,7 +22,7 @@ void httpErrorHandle({
     case 500:
       showSnackBar(
         context,
-        json.decode(response.body)['erro'],
+        json.decode(response.body)['error'],
       );
       break;
     default:
