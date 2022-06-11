@@ -10,7 +10,8 @@ const authRouter = require("./routes/auth");
 //* INIT
 const PORT = 3000;
 const app = express();
-const DB = process.env.API_KEY;
+const DB =
+  "mongodb+srv://abood:123abdul@cluster0.ie3rvas.mongodb.net/?retryWrites=true&w=majority";
 
 //* MIDDLEWARE
 app.use(express.json());
