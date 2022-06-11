@@ -21,6 +21,5 @@ doc/api/
 *.js.map
 
 # NOde stuffs
-.env
-server/.env
-server/node_modules
+
+# server/node_modules
