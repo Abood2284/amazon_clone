@@ -2,6 +2,8 @@ import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/home/screens/home_screen.dart';
+
 class BottomNavBar extends StatefulWidget {
   static const String routeName = '/actual-home';
   const BottomNavBar({Key? key}) : super(key: key);
@@ -11,19 +13,35 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-  final int _page = 0;
+  List<Widget> pages = [
+    const HomeScreen(),
+    const Center(
+      child: Text('Account page'),
+    ),
+    const Center(
+      child: Text('Cart page'),
+    ),
+  ];
+  int _page = 0;
   final double _bottomBarWidht = 42;
   final double _bottomBarBorderWidth = 5;
+  void updatePage(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _page,
         selectedItemColor: GlobalVariables.selectedNavBarColor,
         unselectedItemColor: GlobalVariables.unselectedNavBarColor,
         backgroundColor: GlobalVariables.backgroundColor,
         iconSize: 28,
+        onTap: updatePage,
         items: [
           // * 🔥 HOME
           BottomNavigationBarItem(
