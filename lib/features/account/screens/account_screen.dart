@@ -1,5 +1,6 @@
 import 'package:amazon_clone/constants/global_variables.dart';
 import 'package:amazon_clone/features/account/widgets/below_name_buttons.dart';
+import 'package:amazon_clone/features/account/widgets/order.dart';
 import 'package:amazon_clone/features/account/widgets/user_welcome_name.dart';
 import 'package:flutter/material.dart';
 
@@ -53,6 +54,7 @@ class AccountScreen extends StatelessWidget {
           SizedBox(height: 10),
           BelowNameButtons(),
           SizedBox(height: 20),
+          OrdersWidget(),
         ],
       ),
     );
