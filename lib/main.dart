@@ -7,6 +7,8 @@ import 'package:amazon_clone/router.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'features/admin/screens/admin_screen.dart';
+
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -31,6 +33,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context).user;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Home Demo',
@@ -38,10 +41,12 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true,
         backgroundColor: GlobalVariables.backgroundColor,
       ),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? const BottomNavBar()
-          : const AuthScreen(),
       onGenerateRoute: (settings) => genrateRoute(settings),
+      home: user.token.isNotEmpty
+          ? user.type == 'user'
+              ? const BottomNavBar()
+              : const AdminScreen()
+          : const AuthScreen(),
     );
   }
 }

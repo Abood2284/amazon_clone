@@ -3,7 +3,6 @@
 */
 import 'dart:convert';
 
-import 'package:amazon_clone/common/widgets/bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -79,13 +78,13 @@ class AuthService {
         onSuccess: () async {
           // OBTAIN A OBJECT
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            BottomNavBar.routeName,
-            (route) => false,
-          );
           SharedPreferences pref = await SharedPreferences.getInstance();
           await pref.setString('x-auth-token', jsonDecode(res.body)['token']);
+          // Navigator.pushNamedAndRemoveUntil(
+          //   context,
+          //   BottomNavBar.routeName,
+          //   (route) => false,
+          // );
         },
       );
     } catch (e) {
