@@ -8,7 +8,7 @@ require("dotenv").config(); // TO hide our API key more on notion
 const authRouter = require("./routes/auth");
 
 //* INIT
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const app = express();
 const DB =
   "mongodb+srv://abood:123abdul@cluster0.ie3rvas.mongodb.net/?retryWrites=true&w=majority";
