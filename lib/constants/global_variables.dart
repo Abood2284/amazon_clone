@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-// String uri = 'http://192.168.0.12:3000';
-String uri = 'https://amazon-clone-abdul.herokuapp.com/';
+String uri = 'http://192.168.0.12:3000';
 
 class GlobalVariables {
   // COLORS
