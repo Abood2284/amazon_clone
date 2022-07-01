@@ -35,7 +35,7 @@ mongoose
 //     res.json({name: "Abdul raheem"})
 // })
 
-app.listen(PORT, "0.0.0.0", () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`connected at port ${PORT}`); // JS you use ` back comma and ${} for string interpolation
 });
 // If IP not specified then it will use default
