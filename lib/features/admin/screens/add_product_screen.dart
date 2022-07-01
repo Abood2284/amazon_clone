@@ -131,7 +131,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                           categoryValue = newVal!;
                         });
                       }),
-                )
+                ),
               ],
             ),
           ),
