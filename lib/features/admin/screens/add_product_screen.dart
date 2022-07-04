@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:amazon_clone/common/custom_button.dart';
 import 'package:amazon_clone/common/widgets/custom_text_field.dart';
 import 'package:amazon_clone/constants/utils.dart';
+import 'package:amazon_clone/features/admin/services/admin_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -32,6 +33,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
     super.dispose();
   }
 
+  final adminServices = AdminServices();
+  final _addProductFormKey = GlobalKey<FormState>();
+
   String categoryValue = 'Mobiles';
 
   /// These must match with the list<Map<>> [categoryImages] defined in the GlobalVariables
@@ -50,6 +54,24 @@ class _AddProductScreenState extends State<AddProductScreen> {
     setState(() {
       _images = res;
     });
+  }
+
+  void _sellProduct() {
+    try {
+      if (_addProductFormKey.currentState!.validate() && _images.isNotEmpty) {
+        adminServices.sellProduct(
+          context: context,
+          name: productNameController.text,
+          description: productDescriptionController.text,
+          price: double.parse(productPriceController.text),
+          quantity: double.parse(productQuantityController.text),
+          category: categoryValue,
+          images: _images,
+        );
+      }
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -72,6 +94,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _addProductFormKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10,
@@ -167,7 +190,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                       }),
                 ),
                 const SizedBox(height: 10),
-                CustomButton(text: 'Sell', onTap: () {}),
+                CustomButton(text: 'Sell', onTap: _sellProduct),
               ],
             ),
           ),

@@ -6,6 +6,7 @@ require("dotenv").config(); // TO hide our API key more on notion
 
 //* IMPORT from FILES
 const authRouter = require("./routes/auth");
+const adminRouter = require("./routes/admin");
 
 //* INIT
 const PORT = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ const DB =
 //* MIDDLEWARE
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
 
 // * CONNECTIONS
 mongoose
@@ -35,7 +37,7 @@ mongoose
 //     res.json({name: "Abdul raheem"})
 // })
 
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`connected at port ${PORT}`); // JS you use ` back comma and ${} for string interpolation
 });
 // If IP not specified then it will use default
