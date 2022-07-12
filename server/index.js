@@ -7,6 +7,7 @@ require("dotenv").config(); // TO hide our API key more on notion
 //* IMPORT from FILES
 const authRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin");
+const productRouter = require("./routes/products");
 
 //* INIT
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ const DB =
 app.use(express.json());
 app.use(authRouter);
 app.use(adminRouter);
+app.use(productRouter);
 
 // * CONNECTIONS
 mongoose

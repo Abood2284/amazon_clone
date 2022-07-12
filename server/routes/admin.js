@@ -3,7 +3,7 @@ const { Product } = require("../models/product");
 const admin = require("../middlewares/admin");
 const adminRouter = express.Router();
 
-// Add a product
+// ❌ Add a product ❌
 adminRouter.post("/admin/add-product", admin, async (req, res) => {
   try {
     const { name, description, images, quantity, price, category } = req.body;
@@ -23,13 +23,24 @@ adminRouter.post("/admin/add-product", admin, async (req, res) => {
   }
 });
 
-// Get all products
+// ❌ Get all products ❌
 adminRouter.get("/admin/get-products", admin, async (_req, res) => {
   try {
     const products = await Product.find({}); // Not specifying any criteria means, finding all data
     res.json(products);
   } catch (error) {
     res.status(500).json({ msg: "error.message" });
+  }
+});
+
+// ❌ Delete a product ❌
+adminRouter.post("/admim/delete-product", admin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    let product = await Product.findByIdAndDelete(id);
+    res.json(product); // Not necessary but just to return status code 200
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
   }
 });
 

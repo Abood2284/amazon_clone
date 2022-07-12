@@ -1,6 +1,7 @@
 import 'package:amazon_clone/common/widgets/loader.dart';
 import 'package:amazon_clone/features/admin/screens/add_product_screen.dart';
 import 'package:amazon_clone/features/admin/services/admin_services.dart';
+import 'package:amazon_clone/features/admin/widgets/admin_single_prod_grid_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../models/products.dart';
@@ -19,25 +20,35 @@ class _ProductViewState extends State<ProductView> {
   @override
   void initState() {
     super.initState();
-    // fetchProducts();
+    fetchAllProducts();
   }
 
-  @override
-  void didChangeDependencies() {
-    adminServices.fetchAllProducts(context).then((value) {
-      setState(() {
-        products = value;
-      });
-    });
-    super.didChangeDependencies();
+  fetchAllProducts() async {
+    products = await adminServices.fetchAllProducts(context);
+    print(products!.length);
+    setState(() {});
   }
 
-  // Future<List<Product>> fetchProducts() async {
-  //   return await adminServices.fetchAllProducts(context);
+  // @override
+  // void didChangeDependencies() {
+  //   adminServices.fetchAllProducts(context).then((value) {
+  //     setState(() {
+  //       products = value;
+  //       print(products!.length);
+  //     });
+  // });
+  // super.didChangeDependencies();
   // }
 
   void navigateToAddProductScreen() {
     Navigator.of(context).pushNamed(AddProductScreen.routeName);
+  }
+
+  void deleteProductFunc(Product product, int index) {
+    adminServices.deleteProduct(context, product, () {
+      products!.removeAt(index);
+      setState(() {});
+    });
   }
 
   @override
@@ -45,8 +56,9 @@ class _ProductViewState extends State<ProductView> {
     return products == null
         ? const Loader()
         : Scaffold(
-            body: const Center(
-              child: Text('Prodcuts'),
+            body: AdminSingleProdGridView(
+              productDataObject: products!,
+              deleteProductFunc: deleteProductFunc,
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: navigateToAddProductScreen,

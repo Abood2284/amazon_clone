@@ -13,6 +13,7 @@ import '../../../constants/global_variables.dart';
 import '../../../providers/user_provider.dart';
 
 class AdminServices {
+  // ❌ Sell / add New products ❌
   void sellProduct({
     required BuildContext context,
     required String name,
@@ -67,7 +68,7 @@ class AdminServices {
     }
   }
 
-// Get all products
+// ❌ Get all products ❌
   Future<List<Product>> fetchAllProducts(BuildContext context) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final List<Product> productsList = [];
@@ -103,5 +104,30 @@ class AdminServices {
       showSnackBar(context, e.toString());
     }
     return productsList;
+  }
+
+  // ❌ Delete a product ❌
+  void deleteProduct(
+      BuildContext context, Product product, VoidCallback onSuccess) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    try {
+      var res = await http.post(
+        Uri.parse('$uri/admim/delete-product'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({'id': product.id}),
+      );
+
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            onSuccess();
+          });
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
   }
 }

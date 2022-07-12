@@ -12,6 +12,7 @@ import 'package:amazon_clone/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'features/admin/screens/add_product_screen.dart';
+import 'features/home/screens/views/category_deals_view.dart';
 
 Route<dynamic> genrateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -34,6 +35,14 @@ Route<dynamic> genrateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const AddProductScreen(),
+      );
+    case CategoryDealsScreen.routeName:
+      var category = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => CategoryDealsScreen(
+          categoryName: category,
+        ),
       );
     default:
       // Return your own error 404 screen.

@@ -40,10 +40,10 @@ class Product {
     return Product(
       name: map['name'] as String,
       description: map['description'] as String,
-      quantity: map['quantity'] as double,
+      quantity: map['quantity'].toDouble() ?? 0.0,
       images: List<String>.from(map['images']),
       category: map['category'] as String,
-      price: map['price'] as double,
+      price: map['price'].toDouble() ?? 0.0,
       id: map['_id'],
     );
   }
