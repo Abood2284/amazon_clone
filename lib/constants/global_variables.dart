@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-// String uri = 'http://192.168.0.12:3000'; // On Wifi
-String uri = 'http://172.20.10.2:3000'; // On hotspot
+String uri = 'http://192.168.0.12:3000'; // On Wifi
+// String uri = 'http://172.20.10.2:3000'; // On hotspot
 // String uri = 'http://192.168.43.12:3000';
 
 class GlobalVariables {

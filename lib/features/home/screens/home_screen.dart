@@ -1,4 +1,5 @@
 import 'package:amazon_clone/constants/global_variables.dart';
+import 'package:amazon_clone/features/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/address_box.dart';
@@ -15,6 +16,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  void onSearchBarSubmitted(String query) {
+    Navigator.of(context).pushNamed(SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
+                      onFieldSubmitted: onSearchBarSubmitted,
                       decoration: InputDecoration(
                         // FOr splash effect on tap
                         prefixIcon: InkWell(

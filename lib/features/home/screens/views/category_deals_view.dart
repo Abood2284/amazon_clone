@@ -5,6 +5,7 @@ import 'package:amazon_clone/models/products.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../constants/global_variables.dart';
+import '../../../product_details/screens/product_detail_screen.dart';
 
 class CategoryDealsScreen extends StatefulWidget {
   static const String routeName = '/category-screen';
@@ -73,35 +74,43 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 1, childAspectRatio: 1.4),
                     itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          SizedBox(
-                            height: 140,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.black12,
-                                  width: 0.5,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                            ProductDetailScreen.routeName,
+                            arguments: categoryProd![index],
+                          );
+                        },
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 140,
+                              child: DecoratedBox(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.black12,
+                                    width: 0.5,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 10, top: 10),
+                                  child: Image.network(
+                                      categoryProd![index].images[0]),
                                 ),
                               ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(10),
-                                child: Image.network(
-                                    categoryProd![index].images[0]),
+                            ),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              padding: const EdgeInsets.only(left: 10, top: 10),
+                              child: Text(
+                                categoryProd![index].name.toString(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.topLeft,
-                            padding: const EdgeInsets.only(
-                                left: 0, top: 5, right: 15),
-                            child: Text(
-                              categoryProd![index].name.toString(),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       );
                     },
                   ),
