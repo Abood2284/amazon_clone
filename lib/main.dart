@@ -44,8 +44,8 @@ class _MyAppState extends State<MyApp> {
       onGenerateRoute: (settings) => genrateRoute(settings),
       home: user.token.isNotEmpty
           ? user.type == 'user'
-              ? const BottomNavBar()
-              : const AdminScreen()
+              ? const AdminScreen()
+              : const BottomNavBar()
           : const AuthScreen(),
     );
   }
